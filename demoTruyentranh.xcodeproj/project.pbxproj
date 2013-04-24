@@ -232,6 +232,7 @@
 		66DB17AF17262AB100C93331 = {
 			isa = PBXGroup;
 			children = (
+				66861284172717870068D152 /* QuartzCore.framework */,
 				66B6D4A31726E099004FB711 /* data */,
 				66DB17C117262AB100C93331 /* demoTruyentranh */,
 				66DB17BA17262AB100C93331 /* Frameworks */,
@@ -250,7 +251,6 @@
 		66DB17BA17262AB100C93331 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				66861284172717870068D152 /* QuartzCore.framework */,
 				66DB17BB17262AB100C93331 /* UIKit.framework */,
 				66DB17BD17262AB100C93331 /* Foundation.framework */,
 				66DB17BF17262AB100C93331 /* CoreGraphics.framework */,

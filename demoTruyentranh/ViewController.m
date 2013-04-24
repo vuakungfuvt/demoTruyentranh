@@ -26,7 +26,7 @@
     self.title = @"Tập 1";
     _arrImage = [[NSMutableArray alloc] init];
     _imageView = [[UIImageView alloc] init];
-    _lblPage = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    _lblPage = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
     _lblPage.layer.borderWidth = 2.0;
     
     _view = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -50,10 +50,11 @@
     
     [_imageView addGestureRecognizer:swipeRight];
     [_imageView addGestureRecognizer:swipeLeft];
-    _imageView.image = [_arrImage objectAtIndex:0];
-    _currentPage = 1;
+    //_imageView.image = [_arrImage objectAtIndex:0];
+    _currentPage = [_current intValue];
     _lblPage.textAlignment = NSTextAlignmentCenter;
     _lblPage.text = [NSString stringWithFormat:@"Page: %d - %d",_currentPage,_arrImage.count];
+    _imageView.image = [_arrImage objectAtIndex:_currentPage];
     _lblPage.backgroundColor = [UIColor clearColor];
     [_view addSubview:_imageView];
     [_view addSubview:_lblPage];
@@ -72,6 +73,9 @@
                         completion:^(BOOL finished){
                             
                         }];
+        NSNumber *number = [NSNumber numberWithInt:_currentPage];
+        NSArray *arr = [[NSArray alloc] initWithObjects:number, nil];
+        [arr writeToFile:@"/Users/SCN/Desktop/ios/ ios12/demoTruyentranh/demoTruyentranh/file.plist" atomically:YES];
     }
 }
 - (void) handleSwipeRight : (UISwipeGestureRecognizer *)sender{
@@ -82,11 +86,14 @@
                            options:UIViewAnimationOptionTransitionCurlDown
                         animations:^{
                             _imageView.image = [_arrImage objectAtIndex:_currentPage - 1];
-                            _lblPage.text = [NSString stringWithFormat:@"%d - %d",_currentPage,_arrImage.count];
+                            _lblPage.text = [NSString stringWithFormat:@"Page: %d - %d",_currentPage,_arrImage.count];
                         }
                         completion:^(BOOL finished){
                             
                         }];
+        NSNumber *number = [NSNumber numberWithInt:_currentPage];
+        NSArray *arr = [[NSArray alloc] initWithObjects:number, nil];
+        [arr writeToFile:@"/Users/SCN/Desktop/ios/ ios12/demoTruyentranh/demoTruyentranh/file.plist" atomically:YES];
     }
 }
 - (void)didReceiveMemoryWarning

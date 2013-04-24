@@ -14,6 +14,7 @@
     UIButton *_btnStart;
     UIButton *_btnContinue;
     UIImageView *_imageView;
+    NSArray *arr;
 }
 
 @end
@@ -35,7 +36,11 @@
     [super viewDidLoad];
     UIImageView *imv = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imv.image = [UIImage imageNamed:@"Anhbia.jpg"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"file" ofType:@"plist"];
+    arr = [[NSArray alloc] initWithContentsOfFile:path];
+    NSLog(@"%d",[arr count]);
     [self.view addSubview:imv];
+    NSNumber *number = [arr objectAtIndex:0];
      // Do any additional setup after loading the view from its nib.
     _btnStart = [[UIButton alloc] initWithFrame:CGRectMake(100, 200, 100, 40)];
     
@@ -66,11 +71,25 @@
     [_btnStart addTarget:self
                   action:@selector(actionevent:)
         forControlEvents:UIControlEventTouchUpInside];
+    [_btnContinue addTarget:self
+                     action:@selector(act1:)
+           forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_btnStart];
+}
+- (void) act1:(UIButton*)sender{
+    myView = [[ViewController alloc] init];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"file" ofType:@"plist"];
+    arr = [[NSArray alloc] initWithContentsOfFile:path];
+    myView.current = [arr objectAtIndex:0];
+    UIBarButtonItem *myBarButtonItem = [UIBarButtonItem new];
+    myBarButtonItem.title = @"Back"; // or whatever text you want
+    self.navigationItem.backBarButtonItem = myBarButtonItem;
+    [self.navigationController pushViewController:myView animated:YES];
 }
 - (void) actionevent:(UIButton*)sender{
     NSLog(@"tung");
     myView = [[ViewController alloc] init];
+    myView.current = 0;
     UIBarButtonItem *myBarButtonItem = [UIBarButtonItem new];
     myBarButtonItem.title = @"Back"; // or whatever text you want
     self.navigationItem.backBarButtonItem = myBarButtonItem;
